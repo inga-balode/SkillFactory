@@ -1,0 +1,81 @@
+<?php
+
+interface Specs {
+    public function drive();
+}
+
+abstract class Car implements Specs {
+    
+public $maxSpeed = 80;
+    
+    public function drive() {
+        echo "I'm on my way";
+    }
+
+    abstract public function drivingSpeed();    
+}
+
+
+class Bicycle extends Car {
+    const WHEELS = 2;
+    
+    public static $engineCount = 1;
+    
+    public function drivingSpeed() {
+        echo "Not so fast";
+    }  
+    
+    public function drive() {
+        echo "I love to ride by bicycle, I love to ride my bike";
+    }
+}
+
+class Tractor extends Car {
+    
+    public function drivingSpeed() {
+        return "Driving at " . $this->maxSpeed . " kilometer/hour";
+    }
+}
+
+class Formula extends Car {
+    
+    public $maxSpeed =300;
+    protected $fuel = 12;
+    
+    public function drivingSpeed() {
+        return "Driving at " . $this->maxSpeed . " kilometer/hour";
+    }
+        
+    public function tripTime($distance) {
+        $time = $distance / $this->maxSpeed;
+        echo $time;
+    }
+    
+    public function fuelConsumption($distance) {
+        $res = $distance * ($this->fuel /100);
+        echo "<br> $res";
+        
+    }
+    
+}
+
+echo Bicycle::WHEELS;
+echo '<pre>';
+echo Bicycle::$engineCount;
+echo '</pre>';
+
+$myBike = new Bicycle();
+$myBike->drive();
+
+$tractor = new Tractor();
+echo '<pre>';
+echo $tractor->drivingSpeed();
+echo '</pre>';
+echo $tractor->drive();
+
+
+$speedyCar = new Formula();
+echo '<pre>';
+echo $speedyCar->tripTime(1000);
+echo '</pre>';
+echo $speedyCar->fuelConsumption(1000);
